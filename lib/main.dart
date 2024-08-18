@@ -19,19 +19,26 @@ void main() {
   );
 }
 
+/// La clase principal de la aplicación que configura y ejecuta el widget de la aplicación.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Test Mobile',
+      title:
+          'Test Mobile', // Título de la aplicación que se muestra en el sistema.
       home: AnimatedSplashScreen(
-        splash: Icons.home,
-        duration: 3000,
-        splashIconSize: 230,
-        nextScreen: const SigninScreen(),
-        splashTransition: SplashTransition.fadeTransition,
-        backgroundColor: AppColors.background,
+        splash: Icons
+            .home, // Icono que se muestra durante la pantalla de inicio animada.
+        duration: 3000, // Duración de la pantalla de inicio en milisegundos.
+        splashIconSize: 230, // Tamaño del icono en la pantalla de inicio.
+        nextScreen:
+            const SigninScreen(), // Pantalla a la que se navega después de la pantalla de inicio.
+        splashTransition: SplashTransition
+            .fadeTransition, // Tipo de transición de la pantalla de inicio.
+        backgroundColor:
+            AppColors.background, // Color de fondo de la pantalla de inicio.
       ),
     );
   }

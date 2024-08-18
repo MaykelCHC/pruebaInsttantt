@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 
 import 'draw_arc.dart';
 
+/// Un widget animado que muestra un círculo con varios colores y animaciones de borde.
 class DiscreteCircle extends StatefulWidget {
-  final double size;
-  final Color color;
-  final Color secondCircleColor;
-  final Color thirdCircleColor;
+  /// Crea una instancia de [DiscreteCircle] con los parámetros especificados.
+  ///
+  /// Todos los parámetros son obligatorios.
   const DiscreteCircle({
     super.key,
     required this.color,
@@ -16,6 +16,18 @@ class DiscreteCircle extends StatefulWidget {
     required this.secondCircleColor,
     required this.thirdCircleColor,
   });
+
+  /// Color del círculo principal.
+  final Color color;
+
+  /// Tamaño del círculo.
+  final double size;
+
+  /// Color del segundo círculo (anillo).
+  final Color secondCircleColor;
+
+  /// Color del tercer círculo (anillo).
+  final Color thirdCircleColor;
 
   @override
   State<DiscreteCircle> createState() => _DiscreteCircleState();
@@ -41,11 +53,13 @@ class _DiscreteCircleState extends State<DiscreteCircle>
     final double strokeWidth = size / 8;
     final Color secondRingColor = widget.secondCircleColor;
     final Color thirdRingColor = widget.thirdCircleColor;
+
     return AnimatedBuilder(
       animation: _animationController,
       builder: (_, __) {
         return Stack(
           children: <Widget>[
+            // Círculo de color del tercer anillo con animación de rotación.
             Transform.rotate(
               angle: Tween<double>(begin: 0, end: 2 * math.pi)
                   .animate(
@@ -84,6 +98,7 @@ class _DiscreteCircleState extends State<DiscreteCircle>
                 ),
               ),
             ),
+            // Círculo de color del segundo anillo con animación de rotación.
             Visibility(
               visible: _animationController.value >= 0.5,
               child: Arc.draw(
@@ -108,6 +123,7 @@ class _DiscreteCircleState extends State<DiscreteCircle>
                     .value,
               ),
             ),
+            // Círculo principal con animación de rotación y cambio de ángulo.
             Visibility(
               visible: _animationController.value <= 0.5,
               child: Transform.rotate(
@@ -143,6 +159,7 @@ class _DiscreteCircleState extends State<DiscreteCircle>
                 ),
               ),
             ),
+            // Círculo principal con otra animación de cambio de ángulo.
             Visibility(
               visible: _animationController.value >= 0.5,
               child: Arc.draw(
