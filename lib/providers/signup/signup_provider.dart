@@ -65,9 +65,6 @@ class SignupProvider extends ChangeNotifier {
         password: passwordController.text,
       );
 
-      log('$user');
-      print(user);
-
       final db = await DatabaseService().database;
 
       // Insert user into the database.

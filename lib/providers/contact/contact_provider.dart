@@ -9,6 +9,10 @@ class ContactProvider extends ChangeNotifier {
 
   List<ContactModel> get contacts => _contacts;
 
+  ContactProvider() {
+    loadContacts();
+  }
+
   Future<void> loadContacts() async {
     final db = await DatabaseService().database;
 
@@ -18,7 +22,7 @@ class ContactProvider extends ChangeNotifier {
         .map(
           (c) => ContactModel(
             name: c['name']?.toString(),
-            contactId: c['idNumber']?.toString(),
+            contactId: c['contactId']?.toString(),
           ),
         )
         .toList();
@@ -26,10 +30,13 @@ class ContactProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addContact(ContactModel contact) async {
+  void addContact(ContactModel contact) async {
     final db = await DatabaseService().database;
 
-    await db.insert('contacts', contact.toJson());
+    await db.insert('contacts', {
+      'name': contact.name,
+      'idNumber': contact.contactId,
+    });
     _allContacts.add(contact);
     _contacts.add(contact);
     notifyListeners();

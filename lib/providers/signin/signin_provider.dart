@@ -86,12 +86,12 @@ class SigninProvider extends ChangeNotifier {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Error de autenticación'),
-            content: Text(
+            title: const Text('Error de autenticación'),
+            content: const Text(
                 'Correo o contraseña incorrectos. Por favor, inténtalo de nuevo.'),
             actions: [
               TextButton(
-                child: Text('OK'),
+                child: const Text('OK'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -108,7 +108,7 @@ class SigninProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  late File? _image;
+  File? _image;
   File? get image => _image;
 
   set image(File? value) {
@@ -132,10 +132,10 @@ class SigninProvider extends ChangeNotifier {
         notifyListeners();
       } else {
         // Handle the case where no image was picked
-        print('No image selected.');
+        throw Exception('No image selected.');
       }
     } catch (e) {
-      print('Error picking image: $e');
+      throw Exception('Error picking image: $e');
     }
   }
 }

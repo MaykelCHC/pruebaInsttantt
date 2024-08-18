@@ -12,7 +12,7 @@ class ContactsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ContactProvider>(
-      create: (_) => ContactProvider(),
+      create: (context) => ContactProvider(),
       child: Consumer<ContactProvider>(
         builder: (context, provider, _) {
           return Scaffold(

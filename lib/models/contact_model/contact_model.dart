@@ -20,11 +20,11 @@ class ContactModel {
 
   factory ContactModel.fromJson(Map<String, dynamic> json) => ContactModel(
         name: json["name"],
-        contactId: json["contact_id"],
+        contactId: json["idNumber"],
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
-        "contact_id": contactId,
+        "idNumber": contactId,
       };
 }
