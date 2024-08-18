@@ -32,7 +32,7 @@ class MainTextFormField extends StatelessWidget {
   final TextStyle? style;
   final TextInputAction? textInputAction;
   const MainTextFormField(
-      {Key? key,
+      {super.key,
       this.autofocus = false,
       this.autovalidateMode,
       this.controller,
@@ -59,8 +59,7 @@ class MainTextFormField extends StatelessWidget {
       this.decoration,
       this.style,
       this.textInputAction,
-      this.onFieldSubmitted})
-      : super(key: key);
+      this.onFieldSubmitted});
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
