@@ -9,8 +9,12 @@ import '../../models/models.dart';
 import '../../providers/providers.dart';
 import '../screens.dart';
 
+/// Pantalla de usuario que muestra el perfil del usuario y permite añadir o editar el avatar.
 class UserScreen extends StatelessWidget {
+  /// Modelo de usuario pasado a la pantalla.
   final UserModel? userModel;
+
+  /// Constructor de la pantalla de usuario.
   const UserScreen({super.key, this.userModel});
 
   @override
@@ -23,7 +27,8 @@ class UserScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              provider.logout();
+              provider
+                  .logout(); // Llama al método de cierre de sesión en el proveedor.
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -89,6 +94,7 @@ class UserScreen extends StatelessWidget {
     );
   }
 
+  /// Muestra una hoja de acción para seleccionar la fuente de la imagen del avatar.
   void _showImageSourceActionSheet(
       BuildContext context, SigninProvider provider) {
     showModalBottomSheet(
@@ -102,7 +108,8 @@ class UserScreen extends StatelessWidget {
                 title: const Text('Tomar una foto'),
                 onTap: () {
                   Navigator.pop(context);
-                  provider.pickImage(ImageSource.camera);
+                  provider.pickImage(ImageSource
+                      .camera); // Llama al método para seleccionar imagen desde la cámara.
                 },
               ),
               ListTile(
@@ -110,7 +117,8 @@ class UserScreen extends StatelessWidget {
                 title: const Text('Cargar desde Galeria'),
                 onTap: () {
                   Navigator.pop(context);
-                  provider.pickImage(ImageSource.gallery);
+                  provider.pickImage(ImageSource
+                      .gallery); // Llama al método para seleccionar imagen desde la galería.
                 },
               ),
             ],

@@ -6,12 +6,16 @@ import '../../../providers/providers.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/widgets.dart';
 
+/// Pantalla de registro de la aplicación.
 class SignupScreen extends StatelessWidget {
+  /// Constructor de la pantalla de registro.
   const SignupScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final size = MediaQuery.sizeOf(context);
+
     return Theme(
       data: Theme.of(context).copyWith(
         dividerTheme: const DividerThemeData(color: Colors.transparent),
@@ -39,6 +43,7 @@ class SignupScreen extends StatelessWidget {
     );
   }
 
+  /// Construye el botón para completar el registro.
   _buildButton(SignupProvider provider, ThemeData theme, BuildContext context) {
     return PrimaryButton(
       params: PrimaryButtonParams(
@@ -55,7 +60,8 @@ class SignupScreen extends StatelessWidget {
     );
   }
 
-  _buildForm(SignupProvider provider, size) {
+  /// Construye el formulario de registro.
+  _buildForm(SignupProvider provider, Size size) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Column(

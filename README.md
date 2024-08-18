@@ -1,16 +1,33 @@
-# prueba_insttantt
+prueba_insttantt
 
-A new Flutter project.
+Este proyecto es un punto de partida para una aplicación Flutter.
+Requisitos
 
-## Getting Started
+Asegúrate de tener lo siguiente instalado en tu máquina:
+ - Flutter SDK
+ - Dart SDK
+ - Un editor de código como Visual Studio Code o Android Studio
 
-This project is a starting point for a Flutter application.
+Clonar el Repositorio
 
-A few resources to get you started if this is your first Flutter project:
+Para comenzar con el proyecto, primero clona el repositorio en tu máquina local. Abre una terminal y ejecuta:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+# git clone https://github.com/MaykelCHC/pruebaInsttantt.git
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Configuración del Proyecto
+
+Navega al directorio del proyecto:
+
+# cd prueba_insttantt
+
+Instala las dependencias del proyecto:
+
+# flutter pub get
+
+Ejecutar la Aplicación
+
+Para ejecutar la aplicación en un emulador o dispositivo conectado, utiliza el siguiente comando en la terminal:
+
+# flutter run
+
+Para obtener ayuda adicional con el desarrollo en Flutter, consulta la documentación en línea, que ofrece tutoriales, ejemplos, orientación sobre el desarrollo móvil y una referencia completa de la API.

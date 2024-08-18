@@ -3,16 +3,24 @@ import 'package:flutter/material.dart';
 import '../../core/core.dart';
 import '../others/discrete_circle.dart';
 
+/// Widget de botón primario personalizado.
 class PrimaryButton extends StatelessWidget {
+  /// Crea un botón primario con los parámetros especificados.
+  ///
+  /// Requiere [params], que contiene la configuración del botón.
   const PrimaryButton({
     super.key,
     required this.params,
   });
+
+  /// Parámetros para configurar el botón primario.
   final PrimaryButtonParams params;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     final theme = Theme.of(context);
+
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(left: 32, right: 32),
@@ -102,7 +110,14 @@ class PrimaryButton extends StatelessWidget {
   }
 }
 
+/// Clase que define los parámetros para el botón primario.
+///
+/// Los parámetros permiten configurar el estilo, el comportamiento y la apariencia del botón.
 class PrimaryButtonParams {
+  /// Crea una instancia de [PrimaryButtonParams].
+  ///
+  /// Requiere [title], que es el texto que se muestra en el botón.
+  /// Todos los demás parámetros son opcionales y tienen valores predeterminados.
   const PrimaryButtonParams({
     this.onPressed,
     this.iconColor,
@@ -120,22 +135,49 @@ class PrimaryButtonParams {
     this.sidewidth = 0,
     this.isLoading = false,
   });
+
+  /// Función que se llama cuando se presiona el botón.
   final Function()? onPressed;
+
+  /// Texto que se muestra en el botón.
   final String title;
+
+  /// Estilo del texto del botón.
   final TextStyle? textStyle;
+
+  /// Estilo del borde del botón.
   final BorderStyle borderstyle;
 
+  /// Indica si el botón debe mostrar un ícono junto al texto.
   final bool isRowIcon;
+
+  /// Ícono que se muestra junto al texto si [isRowIcon] es `true`.
   final IconData icon;
+
+  /// Indica si el botón está en estado de carga.
   final bool isLoading;
 
+  /// Radio de borde del botón.
   final double borderRadius;
+
+  /// Ancho del botón.
   final double? width;
+
+  /// Alto del botón.
   final double? height;
+
+  /// Tamaño del ícono.
   final double? sizeIcon;
+
+  /// Ancho del borde del botón.
   final double sidewidth;
 
+  /// Color de fondo del botón.
   final Color? backgroundColor;
+
+  /// Color del ícono.
   final Color? iconColor;
+
+  /// Color del borde del botón.
   final Color colorside;
 }

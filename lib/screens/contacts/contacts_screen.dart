@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:prueba_insttantt/models/models.dart';
-import 'package:prueba_insttantt/widgets/widgets.dart';
 
+import '../../models/models.dart';
 import '../../providers/providers.dart';
 import '../../utils/utils.dart';
+import '../../widgets/widgets.dart';
 
+/// Pantalla para gestionar los contactos del usuario.
 class ContactsScreen extends StatelessWidget {
+  /// Constructor de la pantalla de contactos.
   const ContactsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ContactProvider>(
-      create: (_) => ContactProvider(),
+      create: (context) => ContactProvider(),
       child: Consumer<ContactProvider>(
         builder: (context, provider, _) {
           return Scaffold(
@@ -67,6 +69,7 @@ class ContactsScreen extends StatelessWidget {
     );
   }
 
+  /// Muestra un cuadro de diálogo para añadir un nuevo contacto.
   void _showAddContactForm(BuildContext context, ContactProvider provider) {
     final nameController = TextEditingController();
     final idController = TextEditingController();

@@ -7,11 +7,15 @@ import '../../../utils/utils.dart';
 import '../../../widgets/widgets.dart';
 import '../../screens.dart';
 
+/// Pantalla de inicio de sesión de la aplicación.
 class SigninScreen extends StatelessWidget {
+  /// Constructor de la pantalla de inicio de sesión.
   const SigninScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Theme(
       data: Theme.of(context).copyWith(
         dividerTheme: const DividerThemeData(color: Colors.transparent),
@@ -21,6 +25,7 @@ class SigninScreen extends StatelessWidget {
         child: Consumer<SigninProvider>(
           builder: (context, provider, _) {
             return Scaffold(
+              // Botón persistente en el pie de página.
               persistentFooterButtons: [_buildButton(theme, context)],
               body: SafeArea(
                 child: Padding(
@@ -79,6 +84,7 @@ class SigninScreen extends StatelessWidget {
     );
   }
 
+  /// Construye el botón para navegar a la pantalla de registro.
   _buildButton(ThemeData theme, BuildContext context) {
     return PrimaryButton(
       params: PrimaryButtonParams(
@@ -99,6 +105,7 @@ class SigninScreen extends StatelessWidget {
     );
   }
 
+  /// Construye el formulario de inicio de sesión.
   _buildForm(SigninProvider provider) {
     return Column(
       children: [
