@@ -15,7 +15,6 @@ class SigninScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     return Theme(
       data: Theme.of(context).copyWith(
         dividerTheme: const DividerThemeData(color: Colors.transparent),
@@ -53,24 +52,20 @@ class SigninScreen extends StatelessWidget {
                           const SizedBox(height: 40),
                           _buildForm(provider),
                           const SizedBox(height: 40),
-                          PrimaryButton(
-                            params: PrimaryButtonParams(
-                              title: 'Iniciar Sesión',
-                              borderRadius: 30,
-                              backgroundColor: provider.validateData
-                                  ? AppColors.primary
-                                  : null,
-                              isLoading: provider.isLoading,
-                              textStyle: theme.textTheme.labelLarge!.copyWith(
-                                color: provider.validateData
-                                    ? AppColors.surface
-                                    : AppColors.onSurface.withOpacity(0.38),
+                          if (!provider.isBiometricEnabled)
+                            _buildSesion(provider, theme, context),
+                          if (provider.isBiometricEnabled)
+                            PrimaryButton(
+                              params: PrimaryButtonParams(
+                                title: 'Ingresar con Biometricos',
+                                borderRadius: 30,
+                                backgroundColor: AppColors.primary,
+                                textStyle: theme.textTheme.labelLarge!
+                                    .copyWith(color: AppColors.surface),
+                                onPressed: () =>
+                                    provider.loginWithBiometrics(context),
                               ),
-                              onPressed: provider.validateData
-                                  ? () => provider.login(context)
-                                  : null,
                             ),
-                          ),
                         ],
                       ),
                     ),
@@ -80,6 +75,23 @@ class SigninScreen extends StatelessWidget {
             );
           },
         ),
+      ),
+    );
+  }
+
+  _buildSesion(SigninProvider provider, ThemeData theme, BuildContext context) {
+    return PrimaryButton(
+      params: PrimaryButtonParams(
+        title: 'Iniciar Sesión',
+        borderRadius: 30,
+        backgroundColor: provider.validateData ? AppColors.primary : null,
+        isLoading: provider.isLoading,
+        textStyle: theme.textTheme.labelLarge!.copyWith(
+          color: provider.validateData
+              ? AppColors.surface
+              : AppColors.onSurface.withOpacity(0.38),
+        ),
+        onPressed: provider.validateData ? () => provider.login(context) : null,
       ),
     );
   }

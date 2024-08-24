@@ -30,23 +30,46 @@ class DatabaseService {
       onCreate: (db, version) async {
         // Crea las tablas en la base de datos.
         await db.execute('''
-          CREATE TABLE users(
-            username TEXT PRIMARY KEY,
-            email TEXT,
-            password TEXT
-          )
-        ''');
+        CREATE TABLE users(
+          username TEXT PRIMARY KEY,
+          email TEXT,
+          password TEXT
+        )
+      ''');
         await db.execute('''
-          CREATE TABLE contacts(
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT,
-            idNumber TEXT
-          )
-        ''');
+        CREATE TABLE contacts(
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT,
+          idNumber TEXT,
+          isAppContact INTEGER DEFAULT 0
+        )
+      ''');
       },
       version: 1,
+      onUpgrade: _migrateDB,
     );
   }
 
-  // Métodos adicionales CRUD para User y Contact...
+  Future<void> _migrateDB(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      // Assuming version 2 includes the `isAppContact` column
+      await db.execute('''
+      CREATE TABLE new_contacts(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        idNumber TEXT,
+        isAppContact INTEGER DEFAULT 0
+      )
+    ''');
+
+      await db.execute('''
+      INSERT INTO new_contacts(id, name, idNumber)
+      SELECT id, name, idNumber FROM contacts
+    ''');
+
+      await db.execute('DROP TABLE contacts');
+
+      await db.execute('ALTER TABLE new_contacts RENAME TO contacts');
+    }
+  }
 }
