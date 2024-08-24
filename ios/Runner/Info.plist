@@ -46,8 +46,12 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-    <string>We need to use your camera</string>
+    <string>Necesitamos acceso a la cámara para tomar fotos.</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>We need to access your photo library</string>
+    <string>Necesitamos acceso a la galería para seleccionar fotos.</string>
+    <key>NSContactsUsageDescription</key>
+    <string>contacts</string>
+    <key>NSFaceIDUsageDescription</key>
+    <string>Necesitamos acceso a Face ID para la autenticación biométrica.</string>
 </dict>
 </plist>
