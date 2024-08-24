@@ -91,31 +91,61 @@ class SignupProvider extends ChangeNotifier {
   /// Maneja el proceso de registro de un nuevo usuario.
   Future<void> register(BuildContext context) async {
     try {
-      final user = UserModel(
-        username: usernameController.text,
-        email: emailController.text,
-        password: passwordController.text,
-      );
-
       final db = await DatabaseService().database;
 
-      // Inserta el nuevo usuario en la base de datos.
-      await db.insert('users', user.toJson());
-
-      // Establece el usuario actual.
-      _currentUser = user;
-
-      // Navega a la pantalla de inicio de sesión después del registro exitoso.
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const SigninScreen(),
-        ),
+      // Verifica si el usuario ya existe en la base de datos
+      final existingUser = await db.query(
+        'users',
+        where: 'username = ? OR email = ?',
+        whereArgs: [usernameController.text, emailController.text],
       );
 
-      notifyListeners();
+      if (existingUser.isNotEmpty) {
+        // Si ya existe un usuario con el mismo username o email, muestra un error
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Error de registro'),
+              content: const Text(
+                'El nombre de usuario o correo electrónico ya está en uso. Por favor, elige otro.',
+              ),
+              actions: [
+                TextButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        // Inserta el nuevo usuario en la base de datos
+        final user = UserModel(
+          username: usernameController.text,
+          email: emailController.text,
+          password: passwordController.text,
+        );
+
+        await db.insert('users', user.toJson());
+
+        // Establece el usuario actual
+        _currentUser = user;
+
+        // Navega a la pantalla de inicio de sesión después del registro exitoso
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const SigninScreen(),
+          ),
+        );
+
+        notifyListeners();
+      }
     } catch (e) {
-      // Registra cualquier error que ocurra durante el registro.
+      // Registra cualquier error que ocurra durante el registro
       log('Error al intentar adicionar un usuario a la base de datos: $e');
     }
   }
